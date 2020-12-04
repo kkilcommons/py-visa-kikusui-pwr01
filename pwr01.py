@@ -6,17 +6,21 @@
 
 class Pwr_01:
     
-    def __init__(self, instrument, serial_no, model_no):
-        self.serial_no = serial_no
-        self.model_no = model_no
+    def __init__(self, instrument):
+        self.serial_no = 1
+        self.model_no = 2
         self.instrument = instrument
 
         # case set max values based on model number
 
     def set_voltage(self, voltage):
-        self.instrument.write('VOLTage {}'.format(voltage))
-
+        self.instrument.write('VOLTage{}'.format(voltage))
     
+    def read_voltage(self):
+        return(self.instrument.query('VOLT?'))
 
-
-
+    def output(self, signal):
+        if signal:
+            self.instrument.write('OUTP ON')
+        else:
+            self.instrument.write('OUTP OFF')
